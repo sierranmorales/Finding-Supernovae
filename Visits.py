@@ -6,7 +6,7 @@ import numpy as np
 
 
 # File containing all images that have sufficient overlap
-file = open('/Users/sierra/Documents/Repo1/Match 2/OverlapLog.txt', 'r')
+file = open('OverlapLog.txt', 'r')
 lines = file.readlines()
 
 visits = []
