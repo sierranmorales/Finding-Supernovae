@@ -7,7 +7,7 @@ from drizzlepac import tweakreg
 #
 
 
-input_flcs01 = open('/Users/sierra/Documents/Repo1/Match 2/OverlapLog.txt', 'r')
+input_flcs01 = open('OverlapLog.txt', 'r')
 lines = input_flcs01.readlines()
 
 print(lines)
