@@ -24,7 +24,7 @@ xv = xv.flatten()
 yv = yv.flatten()
 
 
-files = glob.glob('/Users/sierra/Documents/Repo1/mastDownload/HST/*/*_flt.fits')
+files = glob.glob('mastDownload/HST/*/*_flt.fits')
 
 
 for i in tqdm.trange(len(files)):
