@@ -102,6 +102,11 @@ num_supernovae = 100
 # Generates magnitude and flux values
 mag = np.random.random(size=num_supernovae) * 2 + 24
 
+
+# Write supernova mag and coords into file specific for each visit
+#
+#
+
 # Create an array of the same flux value, repeated for each supernova
 flux = np.full(num_supernovae, 10**(-0.4 * (mag - 26.232)))
 
@@ -180,3 +185,5 @@ for match in tqdm(visits_that_match, desc="Processing matches", unit="match"):
         build=True,
         final_refimage=refimage_sn  # Use the reference image for the supernovae-added set
     )
+
+
