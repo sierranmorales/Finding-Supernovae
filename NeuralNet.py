@@ -8,7 +8,6 @@ from astropy.io import fits
 import os
 from PIL import Image
 import numpy as np
-
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report, confusion_matrix
 
@@ -66,8 +65,6 @@ def process_image_pair(new_image_path, ref_image_path, supernova_locations):
 
                 image_list.append(combined_patch)
                 labels.append(1 if has_supernova else 0)
-
-
 
 image_list = []
 labels = []
@@ -152,7 +149,7 @@ model.add(layers.Dense(1, activation='sigmoid'))  # Output layer for binary clas
 
 # Train the model on new data
 model.compile(optimizer=tf.keras.optimizers.Adam(), loss='binary_crossentropy', metrics=['accuracy'])
-epochs = 100
+epochs = 60
 history = model.fit(train_ds, epochs=epochs, validation_data=val_ds)
 
 
@@ -167,7 +164,7 @@ model.compile(
     metrics=[tf.keras.metrics.BinaryAccuracy()]
 )
 
-epochs_fine_tuning = 100  # Number of epochs for fine-tuning, adjust as needed
+epochs_fine_tuning = 60  # Number of epochs for fine-tuning, adjust as needed
 
 history_fine = model.fit(
     train_ds, 
