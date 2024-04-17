@@ -1,9 +1,9 @@
+import pickle
 import numpy as np
 
 #
 #   Searches OverlapLog.txt for images that are suitable to be Drizzled together.
 #
-
 
 # File containing all images that have sufficient overlap
 file = open('OverlapLog.txt', 'r')
@@ -36,7 +36,7 @@ for k in range(len(lines)):
                 found_visit = 1
         if found_visit == 0:
         # We didn't find a place to put image1 and image2
-            visits.append(set([image1]))
+            visits.append(set([image1, image2]))
 
 
 # Set that stores all matching visits
@@ -45,24 +45,16 @@ visits_that_match = set()
 for m in range(len(visits)):
     for n in range(m + 1, len(visits)):
         for line in lines:
-            image1 = line.split(" ")[0]
-            image2 = line.split(" ")[3]
-            if (image1 in visits[m] and image2 in visits[n]) or (image1 in visits[n] and image2 in visits[m]):
-                visits_that_match.add((m, n))
+            filt1 = line.split(" ")[2]
+            filt2 = line.split(" ")[5]
+            if filt1 == filt2:
+                image1 = line.split(" ")[0]
+                image2 = line.split(" ")[3]
+                if (image1 in visits[m] and image2 in visits[n]) or (image1 in visits[n] and image2 in visits[m]):
+                    visits_that_match.add((m, n))
                 
 print(visits_that_match)
 
+with open("data.pkl", "wb") as file:
+    pickle.dump((visits, visits_that_match), file)
 
-
-
-
-
-
-
-
-
-
-
-
-
-#################
