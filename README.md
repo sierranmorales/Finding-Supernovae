@@ -3,7 +3,7 @@ Searching the Hubble Space Telescope Archive for Supernovae
 
 
 
-This project aims to analyze all images in the Hubble Space Telescope archive and, using a convelutional neural network, identify supernovae.
+This project aims to analyze images from the Hubble Space Telescope archive and, using a convelutional neural network, identify supernovae.
 
 Steps to run project:
 - Download CSV file from HST archive containing all files fitting your parameters.
