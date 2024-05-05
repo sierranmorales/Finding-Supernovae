@@ -11,6 +11,6 @@ Steps to run project:
 - Run DownloadData.py to download all images from the .txt file.
 - Run DrizzleMatch.py to determine which images have sufficient overlap and write to OverlapLog.txt
 - Run Visits.py to search OverlapLog.txt for images that are suitable to be Drizzled together and compile them in a data.pkl file
-- Run Drizzle.py to align and subtract the images using TweakReg and AstroDrizzle
+- Run Drizzle5.py to align and subtract the images using TweakReg and AstroDrizzle
 - Run NeuralNet.py to finalize the data and train the model
 
