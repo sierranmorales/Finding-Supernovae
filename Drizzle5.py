@@ -44,8 +44,6 @@ def find_closest_image(filenames, mean_ra, mean_dec):
 
     return closest_image
 
-
-
 # Function to simulate supernovae and save the modified image
 def simulate_and_save_supernovae(image_filename, output_filename, psf_interpolator, supernovae_coords, flux):
     with fits.open(image_filename) as hdul:
@@ -69,9 +67,6 @@ def simulate_and_save_supernovae(image_filename, output_filename, psf_interpolat
 
         hdul[0].header.add_history('Simulated supernovae added.')
         hdul.writeto(output_filename, overwrite=True)
-        
-
-
 
 def generate_random_coords(num_coords, wcs_info):
     ra_dec_coords = []
@@ -83,8 +78,6 @@ def generate_random_coords(num_coords, wcs_info):
         ra, dec = wcs_info.all_pix2world(random_x, random_y, 0)
         ra_dec_coords.append((ra, dec))
     return ra_dec_coords
-
-
 
 # Load the PSF standard data for WFC3/IR
 with fits.open("PSFSTD_WFC3IR_F125W.fits") as f:
@@ -105,20 +98,13 @@ num_supernovae = 100
 # Generates magnitude and flux values
 mag = np.random.random(size=num_supernovae) * 2 + 24
 
-
-# Write supernova mag and coords into file specific for each visit
-#
-#
-
 # Create an array of the same flux value, repeated for each supernova
 flux = np.full(num_supernovae, 10**(-0.4 * (mag - 26.232)))
-
 
 # Main loop to process each visit
 for match in tqdm(visits_that_match, desc="Processing matches", unit="match"):
     # Original image filenames
     input_flcs_orig = [f"{image}" for image in visits[match[0]].union(visits[match[1]])]
-
 
     # Process the original images with tweakreg and astrodrizzle
     # Get the mean RA and Dec for the reference image
@@ -141,7 +127,6 @@ for match in tqdm(visits_that_match, desc="Processing matches", unit="match"):
     with fits.open(input_flcs_orig[0]) as hdul:
         wcs_info = WCS(hdul[1].header)
         supernovae_coords = generate_random_coords(num_supernovae, wcs_info)
-
 
     # Simulate supernovae for each original image and save to new files
     input_flcs_sn = []
@@ -195,9 +180,7 @@ for match in tqdm(visits_that_match, desc="Processing matches", unit="match"):
     with open(outputFile + "_drz.fits") as outputFileDrz:
         wcs = WCS(hdul[1].header)
 
-
     with open(outputFile + "." + "txt", 'w') as outputData:   
         for i, (ra, dec) in enumerate(supernovae_coords):
             x_center, y_center = wcs.all_world2pix(ra, dec, 0)
             outputData.write(" ".join([str(x_center), str(y_center), str(flux[i]), '\n']))
-
